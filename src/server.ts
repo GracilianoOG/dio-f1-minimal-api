@@ -1,6 +1,13 @@
 import fastify from "fastify";
+import cors from "@fastify/cors";
 
 const server = fastify({ logger: true });
+
+server.register(cors, {
+  // origin: ["www.mywebsite.com", "www.example.com"]
+  // methods: ["GET", "POST"],
+  origin: "*",
+});
 
 const teams = [
   { id: 1, name: "McLaren", base: "Woking, United Kingdom" },
