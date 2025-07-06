@@ -71,6 +71,23 @@ server.get<{ Params: DriverParams }>(
   }
 );
 
+interface TeamParams {
+  id: string;
+}
+
+server.get<{ Params: TeamParams }>("/teams/:id", async (request, response) => {
+  const id: number = parseInt(request.params.id);
+  const team = teams.find(d => d.id === id);
+
+  if (!team) {
+    response.type("application/json").code(404);
+    return { message: "Team Not Found" };
+  }
+
+  response.type("application/json").code(200);
+  return team;
+});
+
 server.listen({ port: 3333 }, () => {
   console.log("Server started!");
 });
