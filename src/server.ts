@@ -2,6 +2,7 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import { TeamController } from "./controllers/teamController";
 import { DriverController } from "./controllers/driverController";
+import { ParamsModel } from "./models/ParamsModel";
 
 const server = fastify({ logger: true });
 
@@ -21,11 +22,7 @@ server.get("/drivers", async (request, response) => {
   return new DriverController().getAllDrivers();
 });
 
-interface DriverParams {
-  id: string;
-}
-
-server.get<{ Params: DriverParams }>(
+server.get<{ Params: ParamsModel }>(
   "/drivers/:id",
   async (request, response) => {
     const id: number = parseInt(request.params.id);
@@ -42,11 +39,7 @@ server.get<{ Params: DriverParams }>(
   }
 );
 
-interface TeamParams {
-  id: string;
-}
-
-server.get<{ Params: TeamParams }>("/teams/:id", async (request, response) => {
+server.get<{ Params: ParamsModel }>("/teams/:id", async (request, response) => {
   const id: number = parseInt(request.params.id);
   const teamController = new TeamController();
   const team = teamController.getTeamById(id);
