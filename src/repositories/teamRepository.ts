@@ -19,6 +19,6 @@ export class TeamRepository {
   }
 
   async findTeamById(id: number): Promise<TeamModel | undefined> {
-    return teams.find(d => d.id === id);
+    return teams.find(team => team.id === id);
   }
 }
