@@ -4,6 +4,8 @@
 
 Esta API com tema de Fórmula 1 foi criada para aprender e praticar o desenvolvimento de APIs REST minimalistas, utilizando tecnologias modernas. Ela fornece informações sobre equipes e pilotos, ajudando a entender conceitos de TypeScript, estruturação de APIs e integração de dados na prática.
 
+Durante o desenvolvimento dessa API, aprendi sobre as _minimal APIs_, que se trata de uma API desenvolvida de forma simples e rápida, focada nos resultados e não em sua configuração no início de sua criação. Além disso, aprendi o que são e como trabalhar com _boilerplates_ para agilizar o desenvolvimento. Por fim, decidi organizar o projeto em uma estrutura de camadas para praticar a organização de projeto (antigamente estava tudo em `server.ts` como mostrado na branch `minimal`). Mais um desafio concluído 🤓✨
+
 ## 🗂️ Instalação local
 
 1. Clone este repositório:
