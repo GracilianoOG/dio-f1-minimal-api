@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
+import { TeamController } from "./controllers/teamController";
 
 const server = fastify({ logger: true });
 
@@ -8,19 +9,6 @@ server.register(cors, {
   // methods: ["GET", "POST"],
   origin: "*",
 });
-
-const teams = [
-  { id: 1, name: "McLaren", base: "Woking, United Kingdom" },
-  { id: 2, name: "Mercedes", base: "Brackley, United Kingdom" },
-  { id: 3, name: "Red Bull Racing", base: "Milton Keynes, United Kingdom" },
-  { id: 4, name: "Ferrari", base: "Maranello, Italy" },
-  { id: 5, name: "Alpine", base: "Enstone, United Kingdom" },
-  { id: 6, name: "Aston Martin", base: "Silverstone, United Kingdom" },
-  { id: 7, name: "Williams", base: "Grove, United Kingdom" },
-  { id: 8, name: "Alfa Romeo", base: "Hinwil, Switzerland" },
-  { id: 9, name: "Haas F1 Team", base: "Kannapolis, USA" },
-  { id: 10, name: "AlphaTauri", base: "Faenza, Italy" },
-];
 
 const drivers = [
   { id: 1, name: "Max Verstappen", team: "Red Bull Racing" },
@@ -43,7 +31,7 @@ const drivers = [
 
 server.get("/teams", async (request, response) => {
   response.type("application/json").code(200);
-  return teams;
+  return new TeamController().getAllTeams();
 });
 
 server.get("/drivers", async (request, response) => {
@@ -77,7 +65,8 @@ interface TeamParams {
 
 server.get<{ Params: TeamParams }>("/teams/:id", async (request, response) => {
   const id: number = parseInt(request.params.id);
-  const team = teams.find(d => d.id === id);
+  const teamController = new TeamController();
+  const team = teamController.getTeamById(id);
 
   if (!team) {
     response.type("application/json").code(404);
