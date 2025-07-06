@@ -24,7 +24,7 @@ export class DriverRepository {
     return drivers;
   }
 
-  async findDriverById(id: number) {
+  async findDriverById(id: number): Promise<DriverModel | undefined> {
     return drivers.find(driver => driver.id === id);
   }
 }
