@@ -9,10 +9,10 @@ export class TeamService {
   }
 
   async getAllTeams(): Promise<TeamModel[]> {
-    return this.teamRepository.findAllTeams();
+    return await this.teamRepository.findAllTeams();
   }
 
   async getTeamById(id: number): Promise<TeamModel | undefined> {
-    return this.teamRepository.findTeamById(id);
+    return await this.teamRepository.findTeamById(id);
   }
 }
