@@ -7,7 +7,7 @@ const controller = new TeamController();
 export const teamRoutes = async (fastify: FastifyInstance) => {
   fastify.get("/teams", async (request, response) => {
     response.type("application/json").code(200);
-    return new TeamController().getAllTeams();
+    return controller.getAllTeams();
   });
 
   fastify.get<{ Params: ParamsModel }>(
