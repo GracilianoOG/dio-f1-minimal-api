@@ -53,6 +53,10 @@ server.get<{ Params: ParamsModel }>("/teams/:id", async (request, response) => {
   return team;
 });
 
-server.listen({ port: 3333 }, () => {
-  console.log("Server started!");
+server.listen({ port: 3333 }, (err, address) => {
+  if (err) {
+    server.log.error(err);
+    process.exit(1);
+  }
+  server.log.info(`Server listening at ${address}`);
 });
