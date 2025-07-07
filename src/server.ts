@@ -1,8 +1,8 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import { TeamController } from "./controllers/teamController";
 import { DriverController } from "./controllers/driverController";
 import { ParamsModel } from "./models/ParamsModel";
+import { teamRoutes } from "./routes/teamRoutes";
 
 const server = fastify({ logger: true });
 
@@ -12,10 +12,7 @@ server.register(cors, {
   origin: "*",
 });
 
-server.get("/teams", async (request, response) => {
-  response.type("application/json").code(200);
-  return new TeamController().getAllTeams();
-});
+server.register(teamRoutes);
 
 server.get("/drivers", async (request, response) => {
   response.type("application/json").code(200);
@@ -38,20 +35,6 @@ server.get<{ Params: ParamsModel }>(
     return driver;
   }
 );
-
-server.get<{ Params: ParamsModel }>("/teams/:id", async (request, response) => {
-  const id: number = parseInt(request.params.id);
-  const teamController = new TeamController();
-  const team = teamController.getTeamById(id);
-
-  if (!team) {
-    response.type("application/json").code(404);
-    return { message: "Team Not Found" };
-  }
-
-  response.type("application/json").code(200);
-  return team;
-});
 
 server.listen({ port: 3333 }, (err, address) => {
   if (err) {
