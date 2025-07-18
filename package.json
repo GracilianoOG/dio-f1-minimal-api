@@ -1,7 +1,7 @@
 {
-  "name": "node-blue-boilerplate",
+  "name": "dio-f1-minimal-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "API de estudos desenvolvida com Fastify e TypeScript no tema da Fórmula 1.",
   "main": "index.js",
   "scripts": {
     "dist": "tsup src",
