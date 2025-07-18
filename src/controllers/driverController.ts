@@ -1,17 +1,29 @@
+import { FastifyReply, FastifyRequest } from "fastify";
 import { DriverService } from "../services/driverService";
+import { ParamsModel } from "../models/ParamsModel";
 
-export class DriverController {
-  private driverService: DriverService;
+const driverService: DriverService = new DriverService();
 
-  constructor() {
-    this.driverService = new DriverService();
+export const getDriverById = async (
+  request: FastifyRequest<{ Params: ParamsModel }>,
+  response: FastifyReply
+) => {
+  const id: number = parseInt(request.params.id);
+  const driver = driverService.getDriverById(id);
+
+  if (!driver) {
+    response.type("application/json").code(404);
+    return { message: "Driver Not Found" };
   }
 
-  async getAllDrivers() {
-    return await this.driverService.getAllDrivers();
-  }
+  response.type("application/json").code(200);
+  return driver;
+};
 
-  async getDriverById(id: number) {
-    return await this.driverService.getDriverById(id);
-  }
-}
+export const getAllDrivers = async (
+  request: FastifyRequest,
+  response: FastifyReply
+) => {
+  response.type("application/json").code(200);
+  return await driverService.getAllDrivers();
+};
