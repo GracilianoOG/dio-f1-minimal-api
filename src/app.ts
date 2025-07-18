@@ -4,8 +4,9 @@ import { teamRoutes } from "./routes/teamRoutes";
 import { driverRoutes } from "./routes/driverRoutes";
 
 export const createApp = () => {
-  const app = fastify({ logger: true });
+  const appOptions = { logger: true };
   const routeOptions = { prefix: "/api" };
+  const app = fastify(appOptions);
 
   app.register(cors, {
     origin: "*",
