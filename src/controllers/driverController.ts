@@ -9,14 +9,9 @@ export const getDriverById = async (
   response: FastifyReply
 ) => {
   const id: number = parseInt(request.params.id);
-  const driver = await driverService.getDriverById(id);
-
-  if (!driver) {
-    response.type("application/json").code(HttpStatus.NOT_FOUND);
-    return { message: "Driver Not Found" };
-  }
-
-  response.type("application/json").code(HttpStatus.OK);
+  const data = await driverService.getDriverById(id);
+  const { statusCode, body: driver } = data;
+  response.type("application/json").code(statusCode);
   return driver;
 };
 
