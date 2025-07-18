@@ -76,3 +76,20 @@ export const patchDriver = async (
   response.type("application/json").code(HttpStatus.OK);
   return updatedDriver;
 };
+
+export const updateDriver = async (
+  request: FastifyRequest<{ Params: ParamsModel; Body: DriverModel }>,
+  response: FastifyReply
+) => {
+  const driverId = parseInt(request.params.id);
+  const newDriver = request.body;
+  const updatedDriver = await driverService.updateDriver(driverId, newDriver);
+
+  if (!updatedDriver) {
+    response.type("application/json").code(HttpStatus.BAD_REQUEST);
+    return { message: "Invalid Driver" };
+  }
+
+  response.type("application/json").code(HttpStatus.OK);
+  return updatedDriver;
+};
