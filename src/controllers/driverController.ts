@@ -2,7 +2,6 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import * as driverService from "../services/driverService";
 import { ParamsModel } from "../models/ParamsModel";
 import { DriverModel } from "../models/DriverModel";
-import { HttpStatus } from "../utils/httpStatus";
 import { HttpTypes } from "../utils/httpTypes";
 
 export const getDriverById = async (
