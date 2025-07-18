@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as driverService from "../services/driverService";
 import { ParamsModel } from "../models/ParamsModel";
+import { DriverModel } from "../models/DriverModel";
 
 export const getDriverById = async (
   request: FastifyRequest<{ Params: ParamsModel }>,
@@ -24,4 +25,14 @@ export const getAllDrivers = async (
 ) => {
   response.type("application/json").code(200);
   return await driverService.getAllDrivers();
+};
+
+export const postDriver = async (
+  request: FastifyRequest<{ Body: DriverModel }>,
+  response: FastifyReply
+) => {
+  const driver: DriverModel = request.body;
+  driverService.postDriver(driver);
+  response.type("application/json").code(201);
+  return { message: "Driver Created Successfully" };
 };
