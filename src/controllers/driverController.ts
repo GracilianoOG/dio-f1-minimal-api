@@ -30,15 +30,10 @@ export const postDriver = async (
   response: FastifyReply
 ) => {
   const driver: DriverModel = request.body;
-
-  if (!driver) {
-    response.type("application/json").code(HttpStatus.BAD_REQUEST);
-    return { message: "Invalid Driver" };
-  }
-
-  driverService.postDriver(driver);
-  response.type("application/json").code(HttpStatus.CREATED);
-  return { message: "Driver Created Successfully" };
+  const data = await driverService.postDriver(driver);
+  const { statusCode, body: driverStatus } = data;
+  response.type("application/json").code(statusCode);
+  return driverStatus;
 };
 
 export const deleteDriver = async (

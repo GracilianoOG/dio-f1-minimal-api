@@ -29,8 +29,22 @@ export const getDriverById = async (id: number): Promise<ResponseModel> => {
   return { statusCode: HttpStatus.OK, body: driver };
 };
 
-export const postDriver = async (driver: DriverModel) => {
-  return await driverRepository.insertDriver(driver);
+export const postDriver = async (
+  driver: DriverModel
+): Promise<ResponseModel> => {
+  if (!driver) {
+    return {
+      statusCode: HttpStatus.BAD_REQUEST,
+      body: { message: "Invalid Driver" },
+    };
+  }
+
+  await driverRepository.insertDriver(driver);
+
+  return {
+    statusCode: HttpStatus.CREATED,
+    body: { message: "Driver Created Successfully" },
+  };
 };
 
 export const deleteDriver = async (id: number) => {
