@@ -25,3 +25,17 @@ export const deleteTeam = async (id: number) => {
 
   return false;
 };
+
+export const patchTeam = async (id: number, updates: any) => {
+  const teamId = teams.findIndex(team => team.id === id);
+
+  if (teamId === -1) {
+    return null;
+  }
+
+  const currentDriver: TeamModel = teams[teamId];
+  const updatedDriver: TeamModel = { ...currentDriver, ...updates };
+  teams[teamId] = updatedDriver;
+
+  return updatedDriver;
+};
