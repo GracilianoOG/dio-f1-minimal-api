@@ -1,7 +1,5 @@
 import { DriverModel } from "../models/DriverModel";
-import { DriverRepository } from "../repositories/driverRepository";
-
-const driverRepository = new DriverRepository();
+import * as driverRepository from "../repositories/driverRepository";
 
 export const getAllDrivers = async (): Promise<DriverModel[]> => {
   return await driverRepository.findAllDrivers();
