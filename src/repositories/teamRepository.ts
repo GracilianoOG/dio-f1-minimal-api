@@ -39,3 +39,15 @@ export const patchTeam = async (id: number, updates: any) => {
 
   return updatedDriver;
 };
+
+export const updateTeam = async (id: number, newTeam: TeamModel) => {
+  const teamId = teams.findIndex(team => team.id === id);
+
+  if (teamId === -1) {
+    return null;
+  }
+
+  teams[teamId] = newTeam;
+
+  return newTeam;
+};
