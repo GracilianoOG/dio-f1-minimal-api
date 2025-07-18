@@ -47,3 +47,15 @@ export const deleteTeam = async (
   response.type(HttpTypes.JSON).code(statusCode);
   return teamStatus;
 };
+
+export const patchTeam = async (
+  request: FastifyRequest<{ Params: ParamsModel }>,
+  response: FastifyReply
+) => {
+  const teamId = parseInt(request.params.id);
+  const updates = request.body;
+  const data = await teamService.patchTeam(teamId, updates);
+  const { statusCode, body: patchedTeam } = data;
+  response.type(HttpTypes.JSON).code(statusCode);
+  return patchedTeam;
+};
