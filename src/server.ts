@@ -1,18 +1,6 @@
-import fastify from "fastify";
-import cors from "@fastify/cors";
-import { teamRoutes } from "./routes/teamRoutes";
-import { driverRoutes } from "./routes/driverRoutes";
+import { createApp } from "./app";
 
-const server = fastify({ logger: true });
-
-server.register(cors, {
-  // origin: ["www.mywebsite.com", "www.example.com"]
-  // methods: ["GET", "POST"],
-  origin: "*",
-});
-
-server.register(teamRoutes);
-server.register(driverRoutes);
+const server = createApp();
 
 server.listen({ port: 3333 }, (err, address) => {
   if (err) {
