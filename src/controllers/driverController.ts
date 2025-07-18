@@ -42,15 +42,10 @@ export const deleteDriver = async (
   response: FastifyReply
 ) => {
   const driverId = parseInt(request.params.id);
-  const hasDeleted = await driverService.deleteDriver(driverId);
-
-  if (!hasDeleted) {
-    response.type(HttpTypes.JSON).code(HttpStatus.BAD_REQUEST);
-    return { message: "Invalid Driver" };
-  }
-
-  response.type(HttpTypes.JSON).code(HttpStatus.OK);
-  return { message: "Driver Deleted Successfully" };
+  const data = await driverService.deleteDriver(driverId);
+  const { statusCode, body: driverStatus } = data;
+  response.type(HttpTypes.JSON).code(statusCode);
+  return driverStatus;
 };
 
 export const patchDriver = async (
