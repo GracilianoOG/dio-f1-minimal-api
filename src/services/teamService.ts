@@ -28,3 +28,19 @@ export const getTeamById = async (id: number): Promise<ResponseModel> => {
 
   return { statusCode: HttpStatus.OK, body: team };
 };
+
+export const postTeam = async (team: TeamModel): Promise<ResponseModel> => {
+  if (!team) {
+    return {
+      statusCode: HttpStatus.BAD_REQUEST,
+      body: { message: "Invalid Team" },
+    };
+  }
+
+  await teamRepository.insertTeam(team);
+
+  return {
+    statusCode: HttpStatus.CREATED,
+    body: { message: "Team Created Successfully" },
+  };
+};
