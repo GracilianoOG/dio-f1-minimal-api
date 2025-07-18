@@ -19,13 +19,8 @@ export const getTeamById = async (
   response: FastifyReply
 ) => {
   const id: number = parseInt(request.params.id);
-  const team = await teamService.getTeamById(id);
-
-  if (!team) {
-    response.type("application/json").code(HttpStatus.NOT_FOUND);
-    return { message: "Team Not Found" };
-  }
-
-  response.type("application/json").code(HttpStatus.OK);
+  const data = await teamService.getTeamById(id);
+  const { statusCode, body: team } = data;
+  response.type(HttpTypes.JSON).code(statusCode);
   return team;
 };

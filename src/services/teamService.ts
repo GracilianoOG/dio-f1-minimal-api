@@ -16,8 +16,15 @@ export const getAllTeams = async (): Promise<ResponseModel> => {
   return { statusCode: HttpStatus.OK, body: teams };
 };
 
-export const getTeamById = async (
-  id: number
-): Promise<TeamModel | undefined> => {
-  return await teamRepository.findTeamById(id);
+export const getTeamById = async (id: number): Promise<ResponseModel> => {
+  const team = await teamRepository.findTeamById(id);
+
+  if (!team) {
+    return {
+      statusCode: HttpStatus.NOT_FOUND,
+      body: { message: "Team Not Found" },
+    };
+  }
+
+  return { statusCode: HttpStatus.OK, body: team };
 };
