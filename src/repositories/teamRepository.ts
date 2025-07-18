@@ -33,11 +33,11 @@ export const patchTeam = async (id: number, updates: any) => {
     return null;
   }
 
-  const currentDriver: TeamModel = teams[teamId];
-  const updatedDriver: TeamModel = { ...currentDriver, ...updates };
-  teams[teamId] = updatedDriver;
+  const currentTeam: TeamModel = teams[teamId];
+  const updatedTeam: TeamModel = { ...currentTeam, ...updates };
+  teams[teamId] = updatedTeam;
 
-  return updatedDriver;
+  return updatedTeam;
 };
 
 export const updateTeam = async (id: number, newTeam: TeamModel) => {
