@@ -59,3 +59,20 @@ export const deleteDriver = async (
   response.type("application/json").code(HttpStatus.OK);
   return { message: "Driver Deleted Successfully" };
 };
+
+export const patchDriver = async (
+  request: FastifyRequest<{ Params: ParamsModel }>,
+  response: FastifyReply
+) => {
+  const driverId = parseInt(request.params.id);
+  const updates = request.body;
+  const updatedDriver = await driverService.patchDriver(driverId, updates);
+
+  if (!updatedDriver) {
+    response.type("application/json").code(HttpStatus.BAD_REQUEST);
+    return { message: "Invalid Driver" };
+  }
+
+  response.type("application/json").code(HttpStatus.OK);
+  return updatedDriver;
+};
