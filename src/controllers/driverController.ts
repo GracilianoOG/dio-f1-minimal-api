@@ -2,6 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import * as driverService from "../services/driverService";
 import { ParamsModel } from "../models/ParamsModel";
 import { DriverModel } from "../models/DriverModel";
+import { HttpStatus } from "../utils/HttpStatus";
 
 export const getDriverById = async (
   request: FastifyRequest<{ Params: ParamsModel }>,
@@ -11,11 +12,11 @@ export const getDriverById = async (
   const driver = await driverService.getDriverById(id);
 
   if (!driver) {
-    response.type("application/json").code(404);
+    response.type("application/json").code(HttpStatus.NOT_FOUND);
     return { message: "Driver Not Found" };
   }
 
-  response.type("application/json").code(200);
+  response.type("application/json").code(HttpStatus.OK);
   return driver;
 };
 
@@ -23,7 +24,7 @@ export const getAllDrivers = async (
   request: FastifyRequest,
   response: FastifyReply
 ) => {
-  response.type("application/json").code(200);
+  response.type("application/json").code(HttpStatus.OK);
   return await driverService.getAllDrivers();
 };
 
@@ -34,12 +35,12 @@ export const postDriver = async (
   const driver: DriverModel = request.body;
 
   if (!driver) {
-    response.type("application/json").code(400);
+    response.type("application/json").code(HttpStatus.BAD_REQUEST);
     return { message: "Invalid Driver" };
   }
 
   driverService.postDriver(driver);
-  response.type("application/json").code(201);
+  response.type("application/json").code(HttpStatus.CREATED);
   return { message: "Driver Created Successfully" };
 };
 
@@ -51,10 +52,10 @@ export const deleteDriver = async (
   const hasDeleted = await driverService.deleteDriver(driverId);
 
   if (!hasDeleted) {
-    response.type("application/json").code(400);
+    response.type("application/json").code(HttpStatus.BAD_REQUEST);
     return { message: "Invalid Driver" };
   }
 
-  response.type("application/json").code(200);
+  response.type("application/json").code(HttpStatus.OK);
   return { message: "Driver Deleted Successfully" };
 };
