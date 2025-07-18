@@ -44,3 +44,19 @@ export const postTeam = async (team: TeamModel): Promise<ResponseModel> => {
     body: { message: "Team Created Successfully" },
   };
 };
+
+export const deleteTeam = async (id: number): Promise<ResponseModel> => {
+  const hasDeleted = await teamRepository.deleteTeam(id);
+
+  if (!hasDeleted) {
+    return {
+      statusCode: HttpStatus.BAD_REQUEST,
+      body: { message: "Invalid Team" },
+    };
+  }
+
+  return {
+    statusCode: HttpStatus.OK,
+    body: { message: "Team Deleted Successfully" },
+  };
+};
