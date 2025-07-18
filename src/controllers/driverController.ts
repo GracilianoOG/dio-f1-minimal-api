@@ -66,13 +66,8 @@ export const updateDriver = async (
 ) => {
   const driverId = parseInt(request.params.id);
   const newDriver = request.body;
-  const updatedDriver = await driverService.updateDriver(driverId, newDriver);
-
-  if (!updatedDriver) {
-    response.type(HttpTypes.JSON).code(HttpStatus.BAD_REQUEST);
-    return { message: "Invalid Driver" };
-  }
-
-  response.type(HttpTypes.JSON).code(HttpStatus.OK);
+  const data = await driverService.patchDriver(driverId, newDriver);
+  const { statusCode, body: updatedDriver } = data;
+  response.type(HttpTypes.JSON).code(statusCode);
   return updatedDriver;
 };
