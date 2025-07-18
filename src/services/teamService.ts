@@ -1,18 +1,12 @@
 import { TeamModel } from "../models/TeamModel";
-import { TeamRepository } from "../repositories/teamRepository";
+import * as teamRepository from "../repositories/teamRepository";
 
-export class TeamService {
-  private teamRepository: TeamRepository;
+export const getAllTeams = async (): Promise<TeamModel[]> => {
+  return await teamRepository.findAllTeams();
+};
 
-  constructor() {
-    this.teamRepository = new TeamRepository();
-  }
-
-  async getAllTeams(): Promise<TeamModel[]> {
-    return await this.teamRepository.findAllTeams();
-  }
-
-  async getTeamById(id: number): Promise<TeamModel | undefined> {
-    return await this.teamRepository.findTeamById(id);
-  }
-}
+export const getTeamById = async (
+  id: number
+): Promise<TeamModel | undefined> => {
+  return await teamRepository.findTeamById(id);
+};
