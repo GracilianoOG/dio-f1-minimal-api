@@ -19,12 +19,12 @@ const drivers: DriverModel[] = [
   { id: 16, name: "Nicholas Latifi", team: "Williams" },
 ];
 
-export class DriverRepository {
-  async findAllDrivers(): Promise<DriverModel[]> {
-    return drivers;
-  }
+export const findAllDrivers = async (): Promise<DriverModel[]> => {
+  return drivers;
+};
 
-  async findDriverById(id: number): Promise<DriverModel | undefined> {
-    return drivers.find(driver => driver.id === id);
-  }
-}
+export const findDriverById = async (
+  id: number
+): Promise<DriverModel | undefined> => {
+  return drivers.find(driver => driver.id === id);
+};
