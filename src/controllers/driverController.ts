@@ -8,7 +8,7 @@ export const getDriverById = async (
   response: FastifyReply
 ) => {
   const id: number = parseInt(request.params.id);
-  const driver = driverService.getDriverById(id);
+  const driver = await driverService.getDriverById(id);
 
   if (!driver) {
     response.type("application/json").code(404);
