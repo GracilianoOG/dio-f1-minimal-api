@@ -59,3 +59,15 @@ export const patchTeam = async (
   response.type(HttpTypes.JSON).code(statusCode);
   return patchedTeam;
 };
+
+export const updateTeam = async (
+  request: FastifyRequest<{ Params: ParamsModel; Body: TeamModel }>,
+  response: FastifyReply
+) => {
+  const teamId = parseInt(request.params.id);
+  const newTeam = request.body;
+  const data = await teamService.updateTeam(teamId, newTeam);
+  const { statusCode, body: updatedTeam } = data;
+  response.type(HttpTypes.JSON).code(statusCode);
+  return updatedTeam;
+};
