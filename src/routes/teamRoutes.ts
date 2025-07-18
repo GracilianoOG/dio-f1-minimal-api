@@ -4,4 +4,5 @@ import * as teamController from "../controllers/teamController";
 export const teamRoutes = async (fastify: FastifyInstance) => {
   fastify.get("/teams", teamController.getAllTeams);
   fastify.get("/teams/:id", teamController.getTeamById);
+  fastify.post("/teams", teamController.postTeam);
 };
