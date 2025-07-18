@@ -14,3 +14,14 @@ export const findTeamById = async (
 export const insertTeam = async (team: TeamModel) => {
   teams.push(team);
 };
+
+export const deleteTeam = async (id: number) => {
+  const teamId = teams.findIndex(team => team.id === id);
+
+  if (teamId !== -1) {
+    teams.splice(teamId, 1);
+    return true;
+  }
+
+  return false;
+};
