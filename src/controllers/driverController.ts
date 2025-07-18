@@ -19,8 +19,10 @@ export const getAllDrivers = async (
   request: FastifyRequest,
   response: FastifyReply
 ) => {
-  response.type("application/json").code(HttpStatus.OK);
-  return await driverService.getAllDrivers();
+  const data = await driverService.getAllDrivers();
+  const { statusCode, body: drivers } = data;
+  response.type("application/json").code(statusCode);
+  return drivers;
 };
 
 export const postDriver = async (

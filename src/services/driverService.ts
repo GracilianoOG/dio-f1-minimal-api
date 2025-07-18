@@ -3,8 +3,17 @@ import { ResponseModel } from "../models/ResponseModel";
 import * as driverRepository from "../repositories/driverRepository";
 import { HttpStatus } from "../utils/httpStatus";
 
-export const getAllDrivers = async (): Promise<DriverModel[]> => {
-  return await driverRepository.findAllDrivers();
+export const getAllDrivers = async (): Promise<ResponseModel> => {
+  const drivers = await driverRepository.findAllDrivers();
+
+  if (!drivers) {
+    return {
+      statusCode: HttpStatus.NOT_FOUND,
+      body: { message: "Drivers Not Found" },
+    };
+  }
+
+  return { statusCode: HttpStatus.OK, body: drivers };
 };
 
 export const getDriverById = async (id: number): Promise<ResponseModel> => {
