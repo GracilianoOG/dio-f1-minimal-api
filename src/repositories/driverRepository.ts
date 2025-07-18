@@ -25,3 +25,17 @@ export const deleteDriver = async (id: number) => {
 
   return false;
 };
+
+export const patchDriver = async (id: number, updates: any) => {
+  const driverId = drivers.findIndex(driver => driver.id === id);
+
+  if (driverId === -1) {
+    return null;
+  }
+
+  const currentDriver: DriverModel = drivers[driverId];
+  const updatedDriver: DriverModel = { ...currentDriver, ...updates };
+  drivers[driverId] = updatedDriver;
+
+  return updatedDriver;
+};
