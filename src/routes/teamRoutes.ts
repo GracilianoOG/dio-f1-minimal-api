@@ -7,4 +7,5 @@ export const teamRoutes = async (fastify: FastifyInstance) => {
   fastify.post("/teams", teamController.postTeam);
   fastify.delete("/teams/:id", teamController.deleteTeam);
   fastify.patch("/teams/:id", teamController.patchTeam);
+  fastify.put("/teams/:id", teamController.updateTeam);
 };
