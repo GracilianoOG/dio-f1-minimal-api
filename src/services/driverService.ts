@@ -1,18 +1,14 @@
 import { DriverModel } from "../models/DriverModel";
 import { DriverRepository } from "../repositories/driverRepository";
 
-export class DriverService {
-  private driverRepository: DriverRepository;
+const driverRepository = new DriverRepository();
 
-  constructor() {
-    this.driverRepository = new DriverRepository();
-  }
+export const getAllDrivers = async (): Promise<DriverModel[]> => {
+  return await driverRepository.findAllDrivers();
+};
 
-  async getAllDrivers(): Promise<DriverModel[]> {
-    return await this.driverRepository.findAllDrivers();
-  }
-
-  async getDriverById(id: number): Promise<DriverModel | undefined> {
-    return await this.driverRepository.findDriverById(id);
-  }
-}
+export const getDriverById = async (
+  id: number
+): Promise<DriverModel | undefined> => {
+  return await driverRepository.findDriverById(id);
+};
