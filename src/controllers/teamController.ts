@@ -1,17 +1,27 @@
-import { TeamService } from "../services/teamService";
+import { FastifyReply, FastifyRequest } from "fastify";
+import * as teamService from "../services/teamService";
+import { ParamsModel } from "../models/ParamsModel";
 
-export class TeamController {
-  private teamService: TeamService;
+export const getAllTeams = async (
+  request: FastifyRequest,
+  response: FastifyReply
+) => {
+  response.type("application/json").code(200);
+  return await teamService.getAllTeams();
+};
 
-  constructor() {
-    this.teamService = new TeamService();
+export const getTeamById = async (
+  request: FastifyRequest<{ Params: ParamsModel }>,
+  response: FastifyReply
+) => {
+  const id: number = parseInt(request.params.id);
+  const team = await teamService.getTeamById(id);
+
+  if (!team) {
+    response.type("application/json").code(404);
+    return { message: "Team Not Found" };
   }
 
-  async getAllTeams() {
-    return await this.teamService.getAllTeams();
-  }
-
-  async getTeamById(id: number) {
-    return await this.teamService.getTeamById(id);
-  }
-}
+  response.type("application/json").code(200);
+  return team;
+};
