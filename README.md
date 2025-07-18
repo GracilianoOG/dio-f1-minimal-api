@@ -79,6 +79,17 @@ npm run start:watch
 | PUT    | `/api/drivers/:id` | Atualiza um corredor por completo |
 | DELETE | `/api/drivers/:id` | Remove um corredor pelo ID        |
 
+#### 📍 Rotas dos times
+
+| Método | Endpoint         | Descrição                     |
+| ------ | ---------------- | ----------------------------- |
+| GET    | `/api/teams`     | Lista todos os times          |
+| GET    | `/api/teams/:id` | Retorna um time pelo ID       |
+| POST   | `/api/teams`     | Cria um novo time             |
+| PATCH  | `/api/teams/:id` | Atualiza um time parcialmente |
+| PUT    | `/api/teams/:id` | Atualiza um time por completo |
+| DELETE | `/api/teams/:id` | Remove um time pelo ID        |
+
 ## 🛠️ Ferramentas e tecnologias
 
 [![Ferramentas](https://skillicons.dev/icons?i=ts,js,nodejs,npm,vscode,postman)](https://skillicons.dev)
