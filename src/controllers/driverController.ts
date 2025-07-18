@@ -42,3 +42,19 @@ export const postDriver = async (
   response.type("application/json").code(201);
   return { message: "Driver Created Successfully" };
 };
+
+export const deleteDriver = async (
+  request: FastifyRequest<{ Params: ParamsModel }>,
+  response: FastifyReply
+) => {
+  const driverId = parseInt(request.params.id);
+  const hasDeleted = await driverService.deleteDriver(driverId);
+
+  if (!hasDeleted) {
+    response.type("application/json").code(400);
+    return { message: "Invalid Driver" };
+  }
+
+  response.type("application/json").code(200);
+  return { message: "Driver Deleted Successfully" };
+};
