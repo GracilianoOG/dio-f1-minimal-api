@@ -14,3 +14,7 @@ export const getDriverById = async (
 export const postDriver = async (driver: DriverModel) => {
   return await driverRepository.insertDriver(driver);
 };
+
+export const deleteDriver = async (id: number) => {
+  return await driverRepository.deleteDriver(id);
+};
