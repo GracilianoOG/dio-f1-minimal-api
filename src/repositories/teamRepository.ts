@@ -1,12 +1,12 @@
 import { teams } from "../data/teams";
 import { TeamModel } from "../models/TeamModel";
 
-export class TeamRepository {
-  async findAllTeams(): Promise<TeamModel[]> {
-    return teams;
-  }
+export const findAllTeams = async (): Promise<TeamModel[]> => {
+  return teams;
+};
 
-  async findTeamById(id: number): Promise<TeamModel | undefined> {
-    return teams.find(team => team.id === id);
-  }
-}
+export const findTeamById = async (
+  id: number
+): Promise<TeamModel | undefined> => {
+  return teams.find(team => team.id === id);
+};
