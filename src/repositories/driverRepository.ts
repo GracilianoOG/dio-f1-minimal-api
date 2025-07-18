@@ -10,3 +10,7 @@ export const findDriverById = async (
 ): Promise<DriverModel | undefined> => {
   return drivers.find(driver => driver.id === id);
 };
+
+export const insertDriver = async (driver: DriverModel) => {
+  drivers.push(driver);
+};
