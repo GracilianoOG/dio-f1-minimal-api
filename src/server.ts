@@ -1,8 +1,9 @@
 import { createApp } from "./app";
 
 const server = createApp();
+const port = parseInt(process.env.PORT ?? "3333");
 
-server.listen({ port: 3333 }, (err, address) => {
+server.listen({ port: port }, (err, address) => {
   if (err) {
     server.log.error(err);
     process.exit(1);
