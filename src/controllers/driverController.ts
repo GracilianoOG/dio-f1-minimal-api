@@ -3,6 +3,7 @@ import * as driverService from "../services/driverService";
 import { ParamsModel } from "../models/ParamsModel";
 import { DriverModel } from "../models/DriverModel";
 import { HttpStatus } from "../utils/httpStatus";
+import { HttpTypes } from "../utils/httpTypes";
 
 export const getDriverById = async (
   request: FastifyRequest<{ Params: ParamsModel }>,
@@ -11,7 +12,7 @@ export const getDriverById = async (
   const id: number = parseInt(request.params.id);
   const data = await driverService.getDriverById(id);
   const { statusCode, body: driver } = data;
-  response.type("application/json").code(statusCode);
+  response.type(HttpTypes.JSON).code(statusCode);
   return driver;
 };
 
@@ -21,7 +22,7 @@ export const getAllDrivers = async (
 ) => {
   const data = await driverService.getAllDrivers();
   const { statusCode, body: drivers } = data;
-  response.type("application/json").code(statusCode);
+  response.type(HttpTypes.JSON).code(statusCode);
   return drivers;
 };
 
@@ -32,7 +33,7 @@ export const postDriver = async (
   const driver: DriverModel = request.body;
   const data = await driverService.postDriver(driver);
   const { statusCode, body: driverStatus } = data;
-  response.type("application/json").code(statusCode);
+  response.type(HttpTypes.JSON).code(statusCode);
   return driverStatus;
 };
 
@@ -44,11 +45,11 @@ export const deleteDriver = async (
   const hasDeleted = await driverService.deleteDriver(driverId);
 
   if (!hasDeleted) {
-    response.type("application/json").code(HttpStatus.BAD_REQUEST);
+    response.type(HttpTypes.JSON).code(HttpStatus.BAD_REQUEST);
     return { message: "Invalid Driver" };
   }
 
-  response.type("application/json").code(HttpStatus.OK);
+  response.type(HttpTypes.JSON).code(HttpStatus.OK);
   return { message: "Driver Deleted Successfully" };
 };
 
@@ -61,11 +62,11 @@ export const patchDriver = async (
   const updatedDriver = await driverService.patchDriver(driverId, updates);
 
   if (!updatedDriver) {
-    response.type("application/json").code(HttpStatus.BAD_REQUEST);
+    response.type(HttpTypes.JSON).code(HttpStatus.BAD_REQUEST);
     return { message: "Invalid Driver" };
   }
 
-  response.type("application/json").code(HttpStatus.OK);
+  response.type(HttpTypes.JSON).code(HttpStatus.OK);
   return updatedDriver;
 };
 
@@ -78,10 +79,10 @@ export const updateDriver = async (
   const updatedDriver = await driverService.updateDriver(driverId, newDriver);
 
   if (!updatedDriver) {
-    response.type("application/json").code(HttpStatus.BAD_REQUEST);
+    response.type(HttpTypes.JSON).code(HttpStatus.BAD_REQUEST);
     return { message: "Invalid Driver" };
   }
 
-  response.type("application/json").code(HttpStatus.OK);
+  response.type(HttpTypes.JSON).code(HttpStatus.OK);
   return updatedDriver;
 };
