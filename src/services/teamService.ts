@@ -60,3 +60,22 @@ export const deleteTeam = async (id: number): Promise<ResponseModel> => {
     body: { message: "Team Deleted Successfully" },
   };
 };
+
+export const patchTeam = async (
+  id: number,
+  updates: any
+): Promise<ResponseModel> => {
+  const patchedTeam = await teamRepository.patchTeam(id, updates);
+
+  if (!patchedTeam) {
+    return {
+      statusCode: HttpStatus.BAD_REQUEST,
+      body: { message: "Invalid Team" },
+    };
+  }
+
+  return {
+    statusCode: HttpStatus.OK,
+    body: patchedTeam,
+  };
+};
