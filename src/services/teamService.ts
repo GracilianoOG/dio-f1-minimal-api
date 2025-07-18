@@ -79,3 +79,22 @@ export const patchTeam = async (
     body: patchedTeam,
   };
 };
+
+export const updateTeam = async (
+  id: number,
+  newTeam: TeamModel
+): Promise<ResponseModel> => {
+  const updatedTeam = await teamRepository.updateTeam(id, newTeam);
+
+  if (!updatedTeam) {
+    return {
+      statusCode: HttpStatus.BAD_REQUEST,
+      body: { message: "Invalid Team" },
+    };
+  }
+
+  return {
+    statusCode: HttpStatus.OK,
+    body: updatedTeam,
+  };
+};
