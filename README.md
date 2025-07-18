@@ -6,7 +6,7 @@ Esta API com tema de Fórmula 1 foi criada para aprender e praticar o desenvolvi
 
 Durante o desenvolvimento dessa API, aprendi sobre as _minimal APIs_, que se trata de uma API desenvolvida de forma simples e rápida, focada nos resultados e não em sua configuração no início de sua criação. Além disso, aprendi o que são e como trabalhar com _boilerplates_ para agilizar o desenvolvimento. Por fim, decidi organizar o projeto em uma estrutura de camadas para praticar a organização de projeto (antigamente estava tudo em `server.ts` como mostrado na branch `minimal`). Mais um desafio concluído 🤓✨
 
-## 🗂️ Instalação local
+## 📦 Instalação local
 
 1. Clone este repositório:
 
@@ -38,22 +38,52 @@ npm install
 npm run start:watch
 ```
 
-6. Scripts disponíveis:
+## 📜 Scripts disponíveis
 
-```js
-"scripts": {
-  "dist": "tsup src",
-  "start:dev": "tsx --env-file=.env src/server.ts",
-  "start:watch": "tsx watch --env-file=.env  src/server.ts",
-  "start:dist": "npm run dist && node dist/src/index.js"
-},
+| Script        | Comando                                   | Descrição                                                               |
+| ------------- | ----------------------------------------- | ----------------------------------------------------------------------- |
+| `dist`        | `tsup src`                                | Gera os arquivos compilados da aplicação a partir do diretório `src`.   |
+| `start:dev`   | `tsx --env-file=.env src/server.ts`       | Inicia o servidor em modo de desenvolvimento com variáveis de ambiente. |
+| `start:watch` | `tsx watch --env-file=.env src/server.ts` | Inicia o servidor em modo "watch" (reinicia ao salvar arquivos).        |
+| `start:dist`  | `npm run dist && node dist/server.js`     | Compila o projeto e executa o build gerado na pasta `dist`.             |
+
+## 📒 Documentação
+
+> A versão mínima (sem organização e com poucas features implementadas) se encontra na branch `minimal`.
+
+### 🗂️ Estrutura do projeto
+
 ```
+📁 src/
+  📁 controllers/ -> contém a lógica de cada rota.
+  📁 data/ -> armazena os dados de times e corredores localmente.
+  📁 models/ -> guarda os modelos dos dados (ex: DriverModel).
+  📁 repositories/ -> encapsula a lógica para se comunicar com o banco.
+  📁 routes/ -> define as rotas da API.
+  📁 services/ -> engloba as regras de negócio e tratamento de erros.
+  📁 utils/ -> inclui recursos utilitários para a aplicação.
+  📄 app.ts -> inicializa base da aplicação.
+  📄 server.ts -> cria o servidor.
+```
+
+### 🔀 Rotas
+
+#### 📍 Rotas dos corredores
+
+| Método | Endpoint           | Descrição                         |
+| ------ | ------------------ | --------------------------------- |
+| GET    | `/api/drivers`     | Lista todos os corredores         |
+| GET    | `/api/drivers/:id` | Retorna um corredor pelo ID       |
+| POST   | `/api/drivers`     | Cria um novo corredor             |
+| PATCH  | `/api/drivers/:id` | Atualiza um corredor parcialmente |
+| PUT    | `/api/drivers/:id` | Atualiza um corredor por completo |
+| DELETE | `/api/drivers/:id` | Remove um corredor pelo ID        |
 
 ## 🛠️ Ferramentas e tecnologias
 
 [![Ferramentas](https://skillicons.dev/icons?i=ts,js,nodejs,npm,vscode,postman)](https://skillicons.dev)
 
-- Utiliza `Fastify` e `@fastify/cors` para criar o servidor..
+- Utiliza `Fastify` e `@fastify/cors` para criar o servidor.
 - Desenvolvido com `TypeScript` para maior robustez e segurança.
 - Build e execução com `TSUP` e `TSX`.
 - Tipagens do Node.js com `@types/node`.
