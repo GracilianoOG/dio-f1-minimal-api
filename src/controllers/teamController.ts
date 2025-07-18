@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import * as teamService from "../services/teamService";
 import { ParamsModel } from "../models/ParamsModel";
-import { HttpStatus } from "../utils/HttpStatus";
+import { HttpStatus } from "../utils/httpStatus";
 
 export const getAllTeams = async (
   request: FastifyRequest,
