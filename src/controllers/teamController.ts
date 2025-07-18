@@ -3,6 +3,7 @@ import * as teamService from "../services/teamService";
 import { ParamsModel } from "../models/ParamsModel";
 import { HttpStatus } from "../utils/httpStatus";
 import { HttpTypes } from "../utils/httpTypes";
+import { TeamModel } from "../models/TeamModel";
 
 export const getAllTeams = async (
   request: FastifyRequest,
@@ -23,4 +24,15 @@ export const getTeamById = async (
   const { statusCode, body: team } = data;
   response.type(HttpTypes.JSON).code(statusCode);
   return team;
+};
+
+export const postTeam = async (
+  request: FastifyRequest<{ Body: TeamModel }>,
+  response: FastifyReply
+) => {
+  const team: TeamModel = request.body;
+  const data = await teamService.postTeam(team);
+  const { statusCode, body: teamStatus } = data;
+  response.type(HttpTypes.JSON).code(statusCode);
+  return teamStatus;
 };
