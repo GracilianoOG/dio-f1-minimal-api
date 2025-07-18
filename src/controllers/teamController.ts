@@ -36,3 +36,14 @@ export const postTeam = async (
   response.type(HttpTypes.JSON).code(statusCode);
   return teamStatus;
 };
+
+export const deleteTeam = async (
+  request: FastifyRequest<{ Params: ParamsModel }>,
+  response: FastifyReply
+) => {
+  const teamId = parseInt(request.params.id);
+  const data = await teamService.deleteTeam(teamId);
+  const { statusCode, body: teamStatus } = data;
+  response.type(HttpTypes.JSON).code(statusCode);
+  return teamStatus;
+};
