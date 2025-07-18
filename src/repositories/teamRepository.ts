@@ -10,3 +10,7 @@ export const findTeamById = async (
 ): Promise<TeamModel | undefined> => {
   return teams.find(team => team.id === id);
 };
+
+export const insertTeam = async (team: TeamModel) => {
+  teams.push(team);
+};
