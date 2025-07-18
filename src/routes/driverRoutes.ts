@@ -7,4 +7,5 @@ export const driverRoutes = async (fastify: FastifyInstance) => {
   fastify.post("/drivers", driverController.postDriver);
   fastify.delete("/drivers/:id", driverController.deleteDriver);
   fastify.patch("/drivers/:id", driverController.patchDriver);
+  fastify.put("/drivers/:id", driverController.updateDriver);
 };
