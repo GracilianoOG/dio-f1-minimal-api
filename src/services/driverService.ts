@@ -18,3 +18,7 @@ export const postDriver = async (driver: DriverModel) => {
 export const deleteDriver = async (id: number) => {
   return await driverRepository.deleteDriver(id);
 };
+
+export const patchDriver = async (id: number, updates: any) => {
+  return await driverRepository.patchDriver(id, updates);
+};
