@@ -63,8 +63,23 @@ export const deleteDriver = async (id: number): Promise<ResponseModel> => {
   };
 };
 
-export const patchDriver = async (id: number, updates: any) => {
-  return await driverRepository.patchDriver(id, updates);
+export const patchDriver = async (
+  id: number,
+  updates: any
+): Promise<ResponseModel> => {
+  const patchedDriver = await driverRepository.patchDriver(id, updates);
+
+  if (!patchedDriver) {
+    return {
+      statusCode: HttpStatus.BAD_REQUEST,
+      body: { message: "Invalid Driver" },
+    };
+  }
+
+  return {
+    statusCode: HttpStatus.OK,
+    body: patchedDriver,
+  };
 };
 
 export const updateDriver = async (id: number, newDriver: DriverModel) => {
