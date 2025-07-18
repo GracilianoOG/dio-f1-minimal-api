@@ -1,8 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { DriverService } from "../services/driverService";
+import * as driverService from "../services/driverService";
 import { ParamsModel } from "../models/ParamsModel";
-
-const driverService: DriverService = new DriverService();
 
 export const getDriverById = async (
   request: FastifyRequest<{ Params: ParamsModel }>,
